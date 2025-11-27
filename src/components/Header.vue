@@ -1,18 +1,21 @@
 <template>
     <div class="container">
         <header class="d-flex py-3 border-bottom mb-5">
-            <a to="/" class="me-auto text-decoration-none text-dark">
+            <router-link to="/" class="me-auto text-decoration-none text-dark">
                 <span class="fs-3">Sezer Ünalmış</span>
-            </a>
+            </router-link>
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link"  to="/">Yazılarım</a>
+                    <router-link class="nav-link"  to="/">Yazılarım</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" to="#">Çıkış Yap</a>
+                    <router-link class="nav-link" to="#">Çıkış Yap</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" to="#">Yazı Ekle</a>
+                    <router-link class="nav-link" to="/users/register">Kayıt Ol!</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/admin/addarticle">Yazı Ekle</router-link>
                 </li>
             </ul>
         </header>
