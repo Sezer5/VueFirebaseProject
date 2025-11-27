@@ -20,8 +20,14 @@
 <script setup>
     import { collection, addDoc } from "firebase/firestore"; 
     import { reactive } from "vue";
-    import {DB} from '@/firebase/configs.js'
+    import {DB} from '@/firebase/configs.js';
+    import {useRouter} from 'vue-router';
+    import router from "@/router";
 
+
+
+
+    const routerMain=useRouter();
     const formData = reactive({
         title:'',
         description:''
@@ -34,8 +40,9 @@
         })
         formData.title='';
         formData.description='';
+        routerMain.push('/');
     }
-    
+
 </script>
 
 <style>
