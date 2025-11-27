@@ -1,49 +1,38 @@
 <template>
     <div class="row g-4">
-        <div class="col-md-6">
+        <div class="col-md-6" v-for="note in notes" :key="note.id">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Vue JS</h5>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quo nihil quasi aliquid facere neque cupiditate suscipit illo reiciendis veniam, natus officiis ipsam. Doloribus, illo quas impedit nulla repellendus porro.</p>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quo nihil quasi aliquid facere neque cupiditate suscipit illo reiciendis veniam, natus officiis ipsam. Doloribus, illo quas impedit nulla repellendus porro.</p>
+                    <h5 class="card-title">{{ note.title }}</h5>
+                    <p class="card-text">{{ note.description }}</p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Vue JS</h5>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quo nihil quasi aliquid facere neque cupiditate suscipit illo reiciendis veniam, natus officiis ipsam. Doloribus, illo quas impedit nulla repellendus porro.</p>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quo nihil quasi aliquid facere neque cupiditate suscipit illo reiciendis veniam, natus officiis ipsam. Doloribus, illo quas impedit nulla repellendus porro.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Vue JS</h5>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quo nihil quasi aliquid facere neque cupiditate suscipit illo reiciendis veniam, natus officiis ipsam. Doloribus, illo quas impedit nulla repellendus porro.</p>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quo nihil quasi aliquid facere neque cupiditate suscipit illo reiciendis veniam, natus officiis ipsam. Doloribus, illo quas impedit nulla repellendus porro.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Vue JS</h5>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quo nihil quasi aliquid facere neque cupiditate suscipit illo reiciendis veniam, natus officiis ipsam. Doloribus, illo quas impedit nulla repellendus porro.</p>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quo nihil quasi aliquid facere neque cupiditate suscipit illo reiciendis veniam, natus officiis ipsam. Doloribus, illo quas impedit nulla repellendus porro.</p>
-                </div>
-            </div>
-        </div>
+       
         
     </div>
 </template>
 
 <script setup>
+import {DB} from '@/firebase/configs.js'
+
+import { collection, getDocs } from "firebase/firestore";
+
+import {ref} from 'vue'
+
+const notes = ref([]);
+
+const notesCollection = collection(DB,'notes');
+getDocs(notesCollection).then(snapShot =>{
+    // console.log(snapShot);
+    let documents = [];
+    snapShot.docs.forEach(doc => {
+        documents.push({...doc.data(),id:doc.id});
+    })
+    notes.value = documents;
+    // console.log(notes)
+})
 
 </script>
 
