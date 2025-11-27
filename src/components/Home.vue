@@ -6,6 +6,9 @@
                     <h5 class="card-title">{{ note.title }}</h5>
                     <p class="card-text">{{ note.description }}</p>
                 </div>
+                <div class="card-footer">
+                    <router-link :to="`/admin/updateArticle/${note.id}`">Yazıyı Güncelle</router-link>
+                </div>
             </div>
         </div>
 
