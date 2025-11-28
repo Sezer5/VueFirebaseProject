@@ -13,13 +13,15 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg">Güncelle</button>
             </form>
+            <hr>
+            <button type="submit" @click="deleteNote" class="btn btn-danger btn-lg">Sil</button>
         </div>
     </div>
 </template>
 
 <script setup>
     // import { collection, addDoc } from "firebase/firestore"; 
-    import { doc, getDoc,updateDoc } from "firebase/firestore"; 
+    import { doc, getDoc,updateDoc,deleteDoc } from "firebase/firestore"; 
     import { reactive } from "vue";
     import {DB} from '@/firebase/configs.js';
     import {useRouter,useRoute} from 'vue-router';
@@ -54,6 +56,16 @@
             }
              
 
+    }
+
+    const deleteNote = async()=>{
+        try {
+                const docRef = doc(DB,"notes",route.params.id);
+                await deleteDoc(docRef);
+                router.push('/');
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 </script>
