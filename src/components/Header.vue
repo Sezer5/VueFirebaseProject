@@ -9,7 +9,7 @@
                     <router-link class="nav-link"  to="/">Yazılarım</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="#">Çıkış Yap</router-link>
+                    <p class="nav-link" @click="handleSignOut">Çıkış Yap</p>
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link" to="/users/register">Kayıt Ol!</router-link>
@@ -23,7 +23,17 @@
 </template>
 
 <script setup>
+import {AUTH} from '@/firebase/configs.js';
+import {signOut} from 'firebase/auth';
 
+    const handleSignOut = ()=>{
+        
+        try {
+            signOut(AUTH);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 </script>
 
 <style>
